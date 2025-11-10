@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pespora 7.0 - Festival Seni &amp; Olahraga Nusantara</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+ <style>
+  html {
+  scroll-behavior: smooth;
+}
+
+    /* --- Tambahkan bagian ini di paling atas --- */
+    @font-face {
+        font-family: 'MyFont';
+        src: url('font/kerisdipa.regular.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+
+/* Font kedua */
+@font-face {
+    font-family: 'MySecondFont';
+    src: url('font/pear-haresh-demo.regular.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Font ketiga */
+@font-face {
+    font-family: 'MyThirdFont';
+    src: url('font/transcity.regular.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Font keempat */
+@font-face {
+    font-family: 'MyFourdFont';
+    src: url('font/PerandorySemiCondensed.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+    body {
+        box-sizing: border-box;
+    }
+    
+    .batik-pattern {
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c4a7d9' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3Ccircle cx='15' cy='15' r='2'/%3E%3Ccircle cx='45' cy='15' r='2'/%3E%3Ccircle cx='15' cy='45' r='2'/%3E%3Ccircle cx='45' cy='45' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .wayang-shadow {
+        filter: drop-shadow(4px 4px 8px rgba(139, 69, 19, 0.3));
+    }
+
+    .traditional-border {
+        border-image: linear-gradient(45deg, #c4a7d9, #e6d7f0, #c4a7d9) 1;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .floating {
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .gradient-text {
+        background: linear-gradient(135deg, #8b5a96, #c4a7d9);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+</style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+<body class="h-full bg-white batik-pattern">
+
+  <!-- Bagian Ungu dari Header sampai Buy Ticket Now -->
+  <section class="bg-purple-100">
+
+    <!-- HEADER -->
+    <header class="relative overflow-hidden bg-purple-200 shadow-lg">
+      <div class="relative max-w-7xl mx-auto px-4 py-6">
+        <nav class="flex justify-between items-center">
+          <div class="flex items-center">
+            <span class="text-purple-800 font-bold text-xl md:text-2xl" style="font-family: 'MySecondFont';">
+              PESPORA 7.0
+            </span>
+          </div>
+          <div class="hidden md:flex space-x-6" style="font-family: 'MySecondFont';">
+            <a href="#about" class="text-purple-700 hover:text-purple-900 font-medium">About</a>
+            <a href="#schedule" class="text-purple-700 hover:text-purple-900 font-medium">Ticket</a>
+            <a href="#tickets" class="text-purple-700 hover:text-purple-900 font-medium">Past Event</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <main class="relative">
+      <!-- Ornamen Frame -->
+      <img 
+        src="gambar/F GABUNGAN.png" 
+        alt="Frame Ornamen"
+        class="absolute left-0 right-0 mx-auto top-0 w-full object-contain pointer-events-none select-none"
+        style="z-index: 0; max-width: 100%; height: auto;"
+      >
+
+      <!-- Konten Utama -->
+      <div class="relative z-10 flex flex-col items-center text-center max-w-5xl mx-auto px-6 pt-[50px] pb-20 space-y-6">
+
+        <!-- LOGO -->
+        <div class="flex justify-center mb-4">
+          <div class="h-36 w-36 md:h-48 md:w-48 lg:h-56 lg:w-56 rounded-full overflow-hidden border-4 border-purple-300 shadow-xl">
+            <img src="gambar/Logo Pespora 7.0.png" alt="PESPORA Logo" class="h-full w-full object-cover">
+          </div>
+        </div>
+
+        <!-- COUNTDOWN -->
+        <div id="countdown" class="flex justify-center space-x-5 text-purple-700 mt-4" style="font-family: 'MySecondFont';">
+          <div class="text-center">
+            <p id="days" class="text-5xl md:text-6xl font-bold leading-none">00</p>
+            <p class="text-sm md:text-lg mt-1">Hari</p>
+          </div>
+          <div class="text-center">
+            <p id="hours" class="text-5xl md:text-6xl font-bold leading-none">00</p>
+            <p class="text-sm md:text-lg mt-1">Jam</p>
+          </div>
+          <div class="text-center">
+            <p id="minutes" class="text-5xl md:text-6xl font-bold leading-none">00</p>
+            <p class="text-sm md:text-lg mt-1">Menit</p>
+          </div>
+          <div class="text-center">
+            <p id="seconds" class="text-5xl md:text-6xl font-bold leading-none">00</p>
+            <p class="text-sm md:text-lg mt-1">Detik</p>
+          </div>
+        </div>
+
+        <!-- JUDUL -->
+        <h1 class="text-[64px] sm:text-[90px] md:text-[110px] text-purple-700 font-bold leading-tight mt-4" style="font-family: 'MyFont';">
+          PESPORA 7.0
+        </h1>
+
+        <!-- SUBJUDUL -->
+        <h2 class="text-2xl sm:text-6xl md:text-5xl text-purple-700 mt-2" style="font-family: 'MyThirdFont';">
+          Light the Stage, Own the Age
+        </h2>
+
+        <!-- BAGIAN PUTIH -->
+        <div class="bg-white rounded-2xl shadow-lg px-8 py-10 mt-8 max-w-4xl w-full mx-auto" style="font-family: 'MySecondFont';">
+          
+          <!-- INFO ACARA -->
+          <div class="flex flex-wrap items-center justify-center gap-6 text-purple-700 mb-6">
+            <div class="flex items-center space-x-2">
+              <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M6 2a1 1 0 012 0v1h4V2a1 1 0 112 0v1h1a2 2 0 012 2v1H3V5a2 2 0 012-2h1V2zM3 8h14v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm4 3a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />
+              </svg>
+              <span>28 November 2025</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+              </svg>
+              <span>Auditorium Pusat Kegiatan Mahasiswa UI</span>
+            </div>
+          </div>
+
+          <!-- DESKRIPSI -->
+          <p id="description" class="text-base md:text-lg text-purple-600 max-w-3xl mx-auto leading-relaxed text-center px-4 mt-4 mb-8">
+            An annual event presented by HIMANERA FIA UI that contains art performances by FIA UI's Public Administration students to showcase their talents and creativity and some spectacular performances presented by the guest stars.
+          </p>
+
+          <!-- TOMBOL CTA -->
+          <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSewg6zCXWfo2RLMUuDUclQiW-89WXqZqZVbUh9vFcuFwbDcDw/viewform"
+              target="_blank"
+              class="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-10 py-4 rounded-full text-lg md:text-xl font-bold shadow-lg transform hover:scale-105 transition-all duration-300 inline-block text-center">
+              Buy Ticket Now!
+            </a>
+            <div class="text-center">
+              <p id="price-text" class="text-lg md:text-2xl font-bold text-purple-700">
+                Start From Rp 20.000
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </section>
+
+<section class="pt-180 pb-10 bg-white bg-opacity-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <h3 class="text-8xl font-bold text-center gradient-text mb-18 leading-normal mt-12" 
+        style="font-family: 'MyThirdFont';">
+      Highlights Acara
+    </h3>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+
+      <!-- Card 1: Mystery Event -->
+      <div class="relative text-center p-6 rounded-xl bg-white bg-opacity-70 shadow-lg hover:shadow-xl transition-shadow overflow-hidden">
+        <!-- Awan di empat pojok -->
+        <img src="gambar/MM LINE KIRI.png" alt="" class="absolute top-2 left-2 w-20 opacity-60 pointer-events-none">
+        <img src="gambar/MM LINE KIRI.png" alt="" class="absolute top-2 right-2 w-20 opacity-60 pointer-events-none scale-x-[-1]">
+        <img src="gambar/MM LINE KIRI.png" alt="" class="absolute bottom-2 left-2 w-20 opacity-60 pointer-events-none scale-y-[-1]">
+        <img src="gambar/MM LINE KIRI.png" alt="" class="absolute bottom-2 right-2 w-20 opacity-60 pointer-events-none scale-x-[-1] scale-y-[-1]">
+
+        <div class="w-16 h-16 mx-auto mb-4 bg-purple-200 rounded-full flex items-center justify-center relative z-10">
+          <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h4 class="text-4xl font-bold text-purple-700 mb-2 relative z-10" style="font-family: 'MyThirdFont';">
+          Mystery Event
+        </h4>
+        <p class="text-purple-600 text-justify leading-relaxed relative z-10" style="font-family: 'MySecondFont';">
+          A special performance featuring the remarkably talented students of the Public Administration program, showcasing their creativity, passion, and vibrant spirit through captivating acts that will light up the stage.
+        </p>
+      </div>
+
+      <!-- Card 2: Karaoke Night -->
+      <div class="relative text-center p-6 rounded-xl bg-white bg-opacity-70 shadow-lg hover:shadow-xl transition-shadow overflow-hidden">
+        <img src="gambar/MM LINE KANAN.png" alt="" class="absolute top-2 left-2 w-20 opacity-60 pointer-events-none">
+        <img src="gambar/MM LINE KANAN.png" alt="" class="absolute top-2 right-2 w-20 opacity-60 pointer-events-none scale-x-[-1]">
+        <img src="gambar/MM LINE KANAN.png" alt="" class="absolute bottom-2 left-2 w-20 opacity-60 pointer-events-none scale-y-[-1]">
+        <img src="gambar/MM LINE KANAN.png" alt="" class="absolute bottom-2 right-2 w-20 opacity-60 pointer-events-none scale-x-[-1] scale-y-[-1]">
+
+        <div class="w-16 h-16 mx-auto mb-4 bg-purple-200 rounded-full flex items-center justify-center relative z-10">
+          <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
+          </svg>
+        </div>
+        <h4 class="text-4xl font-bold text-purple-700 mb-2 relative z-10" style="font-family: 'MyThirdFont';">
+          Karaoke Night
+        </h4>
+        <p class="text-purple-600 text-justify leading-relaxed relative z-10" style="font-family: 'MySecondFont';">
+          Your voice may be off-key, but let the vibe flow! Every note you sing lights up the night — this is your stage, so own the age! Sing your heart out and enjoy the night with our live DJ performance, making the fun even louder and the energy unstoppable!
+        </p>
+      </div>
+
+      <!-- Card 3: Public Got Talent -->
+      <div class="relative text-center p-6 rounded-xl bg-white bg-opacity-70 shadow-lg hover:shadow-xl transition-shadow overflow-hidden">
+        <img src="gambar/MM LINE KIRI.png" alt="" class="absolute top-2 left-2 w-20 opacity-60 pointer-events-none">
+        <img src="gambar/MM LINE KIRI.png" alt="" class="absolute top-2 right-2 w-20 opacity-60 pointer-events-none scale-x-[-1]">
+        <img src="gambar/MM LINE KIRI.png" alt="" class="absolute bottom-2 left-2 w-20 opacity-60 pointer-events-none scale-y-[-1]">
+        <img src="gambar/MM LINE KIRI.png" alt="" class="absolute bottom-2 right-2 w-20 opacity-60 pointer-events-none scale-x-[-1] scale-y-[-1]">
+
+        <div class="w-16 h-16 mx-auto mb-4 bg-purple-200 rounded-full flex items-center justify-center relative z-10">
+          <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+          </svg>
+        </div>
+        <h4 class="text-4xl font-bold text-purple-700 mb-2 relative z-10" style="font-family: 'MyThirdFont';">
+          Public Got Talent
+        </h4>
+        <p class="text-purple-600 text-justify leading-relaxed relative z-10" style="font-family: 'MySecondFont';">
+          Public Got Talent is a talent showcase presented by PESPORA 7.0, designed to highlight the best potentials and creativity of students from the Public Administration program.
+        </p>
+      </div>
+
+      <!-- Card 4: Guest Star -->
+      <div class="relative text-center p-6 rounded-xl bg-white bg-opacity-70 shadow-lg hover:shadow-xl transition-shadow overflow-hidden">
+        <img src="gambar/MM LINE KANAN.png" alt="" class="absolute top-2 left-2 w-20 opacity-60 pointer-events-none">
+        <img src="gambar/MM LINE KANAN.png" alt="" class="absolute top-2 right-2 w-20 opacity-60 pointer-events-none scale-x-[-1]">
+        <img src="gambar/MM LINE KANAN.png" alt="" class="absolute bottom-2 left-2 w-20 opacity-60 pointer-events-none scale-y-[-1]">
+        <img src="gambar/MM LINE KANAN.png" alt="" class="absolute bottom-2 right-2 w-20 opacity-60 pointer-events-none scale-x-[-1] scale-y-[-1]">
+
+        <div class="w-16 h-16 mx-auto mb-4 bg-purple-200 rounded-full flex items-center justify-center relative z-10">
+          <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+          </svg>
+        </div>
+        <h4 class="text-4xl font-bold text-purple-700 mb-2 relative z-10" style="font-family: 'MyThirdFont';">
+          Guest Star
+        </h4>
+        <p class="text-purple-600 text-justify leading-relaxed relative z-10" style="font-family: 'MySecondFont';">
+          The guest star performance is specially presented as a form of appreciation and entertainment for students of the Public Administration program.
+          This year’s PESPORA 7.0 features a special appearance by Kendis — a performance not only meant to entertain, but also to strengthen the sense of togetherness and community spirit among the students.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="relative pt-20 pb-24 bg-gradient-to-br from-purple-50 to-pink-50 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+    <!-- Judul -->
+    <h3 class="text-8xl font-bold text-center text-purple-700 mb-4 tracking-wide" style="font-family: 'MyThirdFont';">
+      PESPORA 7.0 Ticket
+    </h3>
+
+    <!-- Subjudul -->
+    <p class="text-center text-purple-600 mb-14 text-xl leading-relaxed max-w-3xl mx-auto" style="font-family: 'MySecondFont';">
+      Get your pass to the most hype event of the year! Choose your vibe, grab your crew, and let's make memories that hit different at PESPORA 7.0.
+    </p>
+
+    <!-- Layout utama -->
+    <div class="relative flex justify-center items-center space-x-10">
+      <!-- Gambar kiri (dua kotak gabung) -->
+      <div class="w-48 md:w-56 lg:w-64">
+        <img src="gambar/GRAFIK KIRI.png" alt="gambar kiri" class="w-full object-contain">
+      </div>
+
+      <!-- Kartu tiket tengah -->
+      <div class="w-[350px] bg-white rounded-3xl shadow-lg p-8 border-2 border-purple-200 hover:border-purple-400 transition-all duration-300 text-center">
+        <h4 class="text-4xl font-bold text-purple-700 mb-2" style="font-family: 'MyThirdFont';">
+          Normal Price
+        </h4>
+        <div class="text-3xl font-bold text-purple-700 mb-4" style="font-family: 'MySecondFont';">
+          Rp 25.000
+        </div>
+
+        <p class="text-purple-700 font-semibold mb-4" style="font-family: 'MySecondFont';">
+          Here’s What You’ll Get
+        </p>
+
+        <ul class="text-purple-600 text-left mb-6 space-y-2" style="font-family: 'MySecondFont';">
+          <li>✔ Capture Moments at Our Photobooth</li>
+          <li>✔ Free-Flow Treats to Keep the Night Alive</li>
+          <li>✔ Dive Into Our Interactive Booth</li>
+          <li>✔ Special Performance</li>
+          <li>✔ Mystery Event</li>
+          <li>✔ Experience the Public Got Talent</li>
+          <li>✔ Sing at Our Karaoke Night</li>
+        </ul>
+
+        <a href="#"
+           class="inline-block bg-purple-600 hover:bg-purple-700 text-white py-3 px-6 rounded-full font-bold transition-colors duration-300"
+           style="font-family: 'MySecondFont';">
+          Register Yourself Now!
+        </a>
+      </div>
+
+      <!-- Gambar kanan (dua kotak gabung) -->
+      <div class="w-48 md:w-56 lg:w-64">
+        <img src="gambar/GRAFIK KANAN.png" alt="gambar kanan" class="w-full object-contain">
+      </div>
+    </div>
+  </div>
+
+  <!-- Dekorasi awan bawah kiri -->
+  <img src="gambar/MM KIRI.png" alt="awan kiri" class="absolute bottom-6 left-10 w-40 opacity-70">
+
+  <!-- Dekorasi awan bawah kanan -->
+  <img src="gambar/MM KANAN.png" alt="awan kanan" class="absolute bottom-6 right-10 w-40 opacity-70 scale-x-[-1]">
+
+  <!-- Ornamen kecil atas kiri & kanan -->
+  <img src="gambar/G KIRI.png" alt="ornamen atas kiri" class="absolute top-8 left-40 w-16 opacity-60">
+  <img src="gambar/G KANAN.png" alt="atas kanan" class="absolute top-8 right-40 w-16 opacity-60 scale-x-[-1]">
+</section>
+
+</a>
+
+     </div>
+    </section><!-- Documentation Section -->
+    <section class="p-10 y-0 bg-white">
+     <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12">
+       <h3 class="text-8xl font-bold text-center gradient-text mb-18 leading-normal mt-12" 
+     style="font-family: 'MyThirdFont';">
+  A Glimpse of Past PESPORA 6.0
+      <p class="text-purple-600 text-lg leading-relaxed" style="font-family: 'MySecondFont';">
+  Captures the most memorable moments from last year’s event PESPORA 6.0
+</p>
+      </div>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Gallery Item 1 -->
+<div class="bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+  <div class="relative w-full h-48 rounded-lg mb-4 overflow-hidden">
+    <img src="gambar/AMNERA 1.jpg" class="absolute w-full h-full object-cover active" alt="Pertunjukan Wayang Kulit">
+    <img src="gambar/AMNERA 2.jpg" class="absolute w-full h-full object-cover hidden" alt="Pertunjukan Wayang Kulit">
+    <img src="gambar/AMNERA 3.jpg" class="absolute w-full h-full object-cover hidden" alt="Pertunjukan Wayang Kulit">
+  </div>
+  <h4 class="text-4xl font-bold text-purple-700 mb-2" style="font-family: 'MyThirdFont';">
+    AMNERA
+  </h4>
+  <p class="text-purple-600 text-justify leading-relaxed" style="font-family: 'MySecondFont';">
+    A fun and heartwarming awarding session featuring various nominations dedicated to Public Administration students, recognizing their achievements and contributions in a lighthearted way.
+  </p>
+</div>
+
+<!-- Gallery Item 2 -->
+<div class="bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+  <div class="relative w-full h-48 rounded-lg mb-4 overflow-hidden">
+    <img src="gambar/BAZAAR 1.jpg" class="absolute w-full h-full object-cover active" alt="Orkestra Gamelan">
+    <img src="gambar/BAZAAR 2.jpg" class="absolute w-full h-full object-cover hidden" alt="Orkestra Gamelan">
+    <img src="gambar/BAZAAR 3.jpg" class="absolute w-full h-full object-cover hidden" alt="Orkestra Gamelan">
+  </div>
+  <h4 class="text-4xl font-bold text-purple-700 mb-2" style="font-family: 'MyThirdFont';">
+    Bazaar
+  </h4>
+  <p class="text-purple-600 text-justify leading-relaxed" style="font-family: 'MySecondFont';">
+    A lively marketplace featuring a variety of food and beverage booths, where visitors can enjoy delicious treats and refreshing drinks while supporting PESPORA’s celebration.
+  </p>
+</div>
+
+<!-- Gallery Item 3 -->
+<div class="bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+  <div class="relative w-full h-48 rounded-lg mb-4 overflow-hidden">
+    <img src="gambar/DRAMA MUSICAL 1.jpg" class="absolute w-full h-full object-cover active" alt="Kompetisi Pencak Silat">
+    <img src="gambar/DRAMA MUSICAL 2.jpg" class="absolute w-full h-full object-cover hidden" alt="Kompetisi Pencak Silat">
+    <img src="gambar/DRAMA MUSICAL 3.jpg" class="absolute w-full h-full object-cover hidden" alt="Kompetisi Pencak Silat">
+  </div>
+  <h4 class="text-4xl font-bold text-purple-700 mb-2" style="font-family: 'MyThirdFont';">
+    Musical Drama
+  </h4>
+  <p class="text-purple-600 text-justify leading-relaxed" style="font-family: 'MySecondFont';">
+    An expressive theatrical performance by Public Administration students, bringing to life emotions and creativity through an artistic drama set around the enchanting theme of Batavia.
+  </p>
+</div>
+
+<!-- Gallery Item 4 -->
+<div class="bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+  <div class="relative w-full h-48 rounded-lg mb-4 overflow-hidden">
+    <img src="gambar/karaoke night 1.jpg" class="absolute w-full h-full object-cover active" alt="Pameran Batik Nusantara">
+    <img src="gambar/karaoke night 2.jpg" class="absolute w-full h-full object-cover hidden" alt="Pameran Batik Nusantara">
+    <img src="gambar/karaoke night 3.jpg" class="absolute w-full h-full object-cover hidden" alt="Pameran Batik Nusantara">
+  </div>
+  <h4 class="text-4xl font-bold text-purple-700 mb-2" style="font-family: 'MyThirdFont';">
+    Karaoke Night
+  </h4>
+  <p class="text-purple-600 text-justify leading-relaxed" style="font-family: 'MySecondFont';">
+    A lively closing night filled with energy and joy, where participants sing along and dance together, accompanied by an exciting DJ performance that lights up the PESPORA night.
+  </p>
+</div>
+
+<!-- Gallery Item 5 -->
+<div class="bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+  <div class="relative w-full h-48 rounded-lg mb-4 overflow-hidden">
+    <img src="gambar/PUBLIC GOT TALENT 1.jpg" class="absolute w-full h-full object-cover active" alt="Festival Kuliner">
+    <img src="gambar/PUBLIC GOT TALENT 2.jpg" class="absolute w-full h-full object-cover hidden" alt="Festival Kuliner">
+    <img src="gambar/PUBLIC GOT TALENT 3.jpg" class="absolute w-full h-full object-cover hidden" alt="Festival Kuliner">
+  </div>
+  <h4 class="text-4xl font-bold text-purple-700 mb-2" style="font-family: 'MyThirdFont';">
+    Public Got Talent
+  </h4>
+  <p class="text-purple-600 text-justify leading-relaxed" style="font-family: 'MySecondFont';">
+    A vibrant showcase where Public Administration students express their creativity and talent through artistic performances, celebrating individuality and passion in the arts.
+  </p>
+</div>
+
+<!-- Gallery Item 6 -->
+<div class="bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+  <div class="relative w-full h-48 rounded-lg mb-4 overflow-hidden">
+    <img src="gambar/Special Performance 1.jpg" class="absolute w-full h-full object-cover active" alt="Parade Budaya">
+    <img src="gambar/Special Performance 2.jpg" class="absolute w-full h-full object-cover hidden" alt="Parade Budaya">
+    <img src="gambar/Special Performance 3.jpg" class="absolute w-full h-full object-cover hidden" alt="Parade Budaya">
+  </div>
+  <h4 class="text-4xl font-bold text-purple-700 mb-2" style="font-family: 'MyThirdFont';">
+    Special Performance
+  </h4>
+  <p class="text-purple-600 text-justify leading-relaxed" style="font-family: 'MySecondFont';">
+    An exclusive segment featuring talented guest stars who captivate the audience with live music performances and soulful singing.
+  </p>
+</div>
+</div>
+
+</section><!-- CTA Section -->
+<section class="relative py-16 bg-gradient-to-r from-purple-400 to-purple-500 text-white overflow-hidden">
+  <div class="max-w-4xl mx-auto text-center px-4 relative z-10">
+    <h3 class="text-8xl font-bold mb-6" style="font-family: 'MyThirdFont';">
+      Don’t Miss Out!
+    </h3>
+    <p class="text-xl mb-8 opacity-90 text-center" style="font-family: 'MySecondFont';">
+      What are you waiting for? Secure your place now, and let’s embrace the moments, create the memories, enjoy the night together! See you there, Pesporians!
+    </p>
+
+    <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+      <!-- Buy Ticket -->
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSewg6zCXWfo2RLMUuDUclQiW-89WXqZqZVbUh9vFcuFwbDcDw/viewform" target="_blank"
+        class="bg-white text-purple-700 px-8 py-4 rounded-full text-lg font-bold hover:bg-purple-50 transform hover:scale-105 transition-all duration-300 shadow-lg"
+        style="font-family: 'MySecondFont';">
+        Buy Ticket
+      </a>
+
+      <!-- More Information -->
+      <a href="https://www.instagram.com/pesporanegara/" target="_blank"
+        class="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-white hover:text-purple-700 transition-all duration-300"
+        style="font-family: 'MySecondFont';">
+        More Information
+      </a>
+    </div>
+  </div>
+
+  <!-- Cloud Decorations -->
+  <img src="gambar/MM KIRI.png" alt="cloud left" class="absolute bottom-0 left-10 w-64 opacity-95 pointer-events-none">
+  <img src="gambar/MM KANAN.png" alt="cloud right" class="absolute bottom-0 right-10 w-64 opacity-95 pointer-events-none scale-x-[-1]">
+</section>
+
+<!-- Footer -->
+<footer class="bg-purple-100 py-12" style="font-family: 'MySecondFont';">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid md:grid-cols-3 gap-8">
+      
+      <div>
+        <h4 class="text-xl font-bold mb-4 text-purple-800">PESPORA 7.0</h4>
+        <p class="text-purple-700">Pentas Seni Pemoeda Pemoedi Negara 2025</p>
+      </div>
+      
+      <div>
+        <h4 class="text-xl font-bold mb-4 text-purple-800">Contact</h4>
+        <p class="text-purple-700 mb-2">📧 pesporanegara@gmail.com</p>
+        <p class="text-purple-700 mb-2">📱 +62811236941 / zorayarasyaa (Zoraya)</p>
+        <p class="text-purple-700 mb-2">📱 +627780941921 / y.soez9 (Yezi)</p>
+      </div>
+      
+      <div>
+        <h4 class="text-xl font-bold mb-4 text-purple-800">Social Media</h4>
+        <div class="flex space-x-4">
+          <a href="https://www.instagram.com/pesporanegara/" class="text-purple-700 hover:text-purple-900 font-medium">Instagram</a>
+          <a href="https://www.linkedin.com/company/pespora/" class="text-purple-700 hover:text-purple-900 font-medium">LinkedIn</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="border-t border-purple-300 mt-8 pt-8 text-center">
+      <p class="text-purple-700">© 2025 PESPORA 7.0. Semua hak cipta dilindungi.</p>
+    </div>
+  </div>
+</footer>
+
+
+</div>
+<script>
+        // Element SDK Configuration
+        const defaultConfig = {
+            main_title: "PESPORA 7.0",
+            subtitle: "Festival Seni & Olahraga Nusantara",
+            event_date: "15-20 November 2024",
+            event_location: "Jakarta Convention Center",
+            description: "Rayakan keberagaman budaya Indonesia melalui festival spektakuler yang memadukan seni tradisional, olahraga, dan pertunjukan budaya dari seluruh Nusantara. Saksikan keindahan warisan leluhur dalam kemasan modern yang memukau.",
+            cta_button: "Beli Tiket Sekarang",
+            price_text: "Mulai dari Rp 150.000",
+            background_color: "#f3e8ff",
+            surface_color: "#ffffff",
+            text_color: "#7c3aed",
+            primary_action_color: "#8b5cf6",
+            secondary_action_color: "#a78bfa",
+            font_family: "Inter",
+            font_size: 16
+        };
+
+        async function onConfigChange(config) {
+            // Update text content
+            document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
+            document.getElementById('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+            document.getElementById('event-date').textContent = config.event_date || defaultConfig.event_date;
+            document.getElementById('event-location').textContent = config.event_location || defaultConfig.event_location;
+            document.getElementById('description').textContent = config.description || defaultConfig.description;
+            document.getElementById('cta-button').textContent = config.cta_button || defaultConfig.cta_button;
+            document.getElementById('price-text').textContent = config.price_text || defaultConfig.price_text;
+
+            // Update colors
+            const backgroundColor = config.background_color || defaultConfig.background_color;
+            const surfaceColor = config.surface_color || defaultConfig.surface_color;
+            const textColor = config.text_color || defaultConfig.text_color;
+            const primaryActionColor = config.primary_action_color || defaultConfig.primary_action_color;
+            const secondaryActionColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+
+            document.body.style.background = `linear-gradient(to bottom right, ${backgroundColor}, ${surfaceColor})`;
+            
+            // Update text colors
+            const textElements = document.querySelectorAll('h1, h2, h3, h4, p, span');
+            textElements.forEach(el => {
+                if (!el.classList.contains('text-white')) {
+                    el.style.color = textColor;
+                }
+            });
+
+            // Update button colors
+            const primaryButtons = document.querySelectorAll('#cta-button');
+            primaryButtons.forEach(btn => {
+                btn.style.backgroundColor = primaryActionColor;
+            });
+
+            // Update font
+            const customFont = config.font_family || defaultConfig.font_family;
+            const baseSize = config.font_size || defaultConfig.font_size;
+            
+            document.body.style.fontFamily = `${customFont}, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`;
+            
+            // Scale fonts proportionally
+            document.getElementById('main-title').style.fontSize = `${baseSize * 4}px`;
+            document.getElementById('subtitle').style.fontSize = `${baseSize * 1.5}px`;
+            document.getElementById('event-date').style.fontSize = `${baseSize * 1.125}px`;
+            document.getElementById('event-location').style.fontSize = `${baseSize * 1.125}px`;
+            document.getElementById('description').style.fontSize = `${baseSize * 1.125}px`;
+            document.getElementById('cta-button').style.fontSize = `${baseSize * 1.25}px`;
+            document.getElementById('price-text').style.fontSize = `${baseSize * 1.5}px`;
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [
+                    {
+                        get: () => config.background_color || defaultConfig.background_color,
+                        set: (value) => {
+                            config.background_color = value;
+                            window.elementSdk.setConfig({ background_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.surface_color || defaultConfig.surface_color,
+                        set: (value) => {
+                            config.surface_color = value;
+                            window.elementSdk.setConfig({ surface_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.text_color || defaultConfig.text_color,
+                        set: (value) => {
+                            config.text_color = value;
+                            window.elementSdk.setConfig({ text_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.primary_action_color || defaultConfig.primary_action_color,
+                        set: (value) => {
+                            config.primary_action_color = value;
+                            window.elementSdk.setConfig({ primary_action_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+                        set: (value) => {
+                            config.secondary_action_color = value;
+                            window.elementSdk.setConfig({ secondary_action_color: value });
+                        }
+                    }
+                ],
+                borderables: [],
+                fontEditable: {
+                    get: () => config.font_family || defaultConfig.font_family,
+                    set: (value) => {
+                        config.font_family = value;
+                        window.elementSdk.setConfig({ font_family: value });
+                    }
+                },
+                fontSizeable: {
+                    get: () => config.font_size || defaultConfig.font_size,
+                    set: (value) => {
+                        config.font_size = value;
+                        window.elementSdk.setConfig({ font_size: value });
+                    }
+                }
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["main_title", config.main_title || defaultConfig.main_title],
+                ["subtitle", config.subtitle || defaultConfig.subtitle],
+                ["event_date", config.event_date || defaultConfig.event_date],
+                ["event_location", config.event_location || defaultConfig.event_location],
+                ["description", config.description || defaultConfig.description],
+                ["cta_button", config.cta_button || defaultConfig.cta_button],
+                ["price_text", config.price_text || defaultConfig.price_text]
+            ]);
+        }
+
+        // Initialize Element SDK
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities,
+                mapToEditPanelValues
+            });
+        }
+
+        // Add smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add click handlers for CTA buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Create a success message
+                const message = document.createElement('div');
+                message.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+                message.textContent = 'Terima kasih! Anda akan diarahkan ke halaman pembelian tiket.';
+                document.body.appendChild(message);
+                
+                setTimeout(() => {
+                    message.remove();
+                }, 3000);
+            });
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'995adcc916274ab9',t:'MTc2MTY1OTAwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+ <script>
+  // Tanggal acara (28 November 2025, jam 19:00 misalnya)
+  const eventDate = new Date("November 28, 2025 19:00:00").getTime();
+
+  const countdown = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+
+    // Hitung waktu tersisa
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Tampilkan di elemen HTML
+    document.getElementById("days").innerText = days.toString().padStart(2, "0");
+    document.getElementById("hours").innerText = hours.toString().padStart(2, "0");
+    document.getElementById("minutes").innerText = minutes.toString().padStart(2, "0");
+    document.getElementById("seconds").innerText = seconds.toString().padStart(2, "0");
+
+    // Jika countdown selesai
+    if (distance < 0) {
+      clearInterval(countdown);
+      document.getElementById("countdown").innerHTML = `
+        <p class="text-3xl text-purple-700 font-bold" style="font-family: 'MySecondFont';">
+          Acara sedang berlangsung! 🎉
+        </p>`;
+    }
+  }, 1000);
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // ambil semua container gallery
+  const galleries = document.querySelectorAll(".grid .relative");
+  let index = 0;
+
+  setInterval(() => {
+    galleries.forEach(gallery => {
+      const imgs = gallery.querySelectorAll("img");
+      if (imgs.length === 0) return;
+
+      // sembunyikan semua gambar
+      imgs.forEach(img => img.classList.add("hidden"));
+      // tampilkan gambar sesuai urutan
+      imgs[index % imgs.length].classList.remove("hidden");
+    });
+    index++;
+  }, 1500); // ganti semua tiap 3 detik
+});
+</script>
+<!-- 🎵 Background Music Control -->
+<audio id="bgMusic" loop>
+  <source src="lagu/donkgedank-impenan-free-use-backsound-nusantara_JU0pEzs7.mp3" type="audio/mpeg">
+</audio>
+
+<div class="fixed bottom-6 right-6 flex space-x-3 z-50">
+  <button onclick="document.getElementById('bgMusic').play()" 
+    class="bg-white text-purple-700 px-5 py-3 rounded-full shadow-lg hover:bg-purple-100 font-semibold transition-all duration-300">
+    🎵 Play
+  </button>
+  <button onclick="document.getElementById('bgMusic').pause()" 
+    class="bg-purple-700 text-white px-5 py-3 rounded-full shadow-lg hover:bg-purple-800 font-semibold transition-all duration-300">
+    ⏸ Pause
+  </button>
+</div>
+</body>
+</html>
+</body>
+</html>
